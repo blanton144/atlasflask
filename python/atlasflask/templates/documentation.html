@@ -1,0 +1,199 @@
+{% extends "layout.html" %}
+{% set active_page = "documentation" %}
+
+{% block head %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<link rel="stylesheet" type="text/css" media="screen" href="static/css/prospectus.css" />
+<meta name="robots" content="noindex" />
+<meta content="text/html;">
+<title>NASA-Sloan Atlas: Documentation</title>
+<meta http-equiv="refresh" CONTENT="600"/>
+
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<link href="static/css/cover.css" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+
+<div class=row> 
+	<div class=col-md-9 role=main>
+
+<h1 class="text-left" id="introduction">Introduction</h1>
+
+<p class="text-left">The NASA-Sloan Atlas sample was selected to
+include virtually all known redshifts of local galaxies within the
+imaging coverage of the SDSS.  The latest version extends
+to <var>z&lt;0.15</var> for galaxies within 
+<a href="http://sdss3.org/dr12">SDSS DR12</a>. For each such galaxy,
+we have created image mosaics from SDSS and GALEX and rephotometered
+the <var>ugriz</var> bands plus the far and near ultraviolet bands in
+a self-consistent manner. After cleaning a number of suspicious cases
+the final catalog contains 641,409 galaxies.</p>
+
+<p class="text-left"> This catalog is meant to represent an
+improvement on the standard pipeline catalogs from either survey. In
+particular, the SDSS standard pipeline oversubtracts the sky for large
+objects, whereas our analysis avoids that issue.  However, there are
+still existing errors that users should watch out for, listed in
+our <a href="caveats">caveats</a>.</p>
+
+<h1 class="text-left" id="catalogs">Source catalogs</h1>
+
+<p class="text-left">The list of galaxies in the NSA was generated on
+the basis of several
+catalogs: <a href="http://www.sdss3.org/dr8">Sloan Digital Sky Server
+DR8</a>, <a href="http://nedwww.ipac.caltech.edu/">NASA Extragalactic
+Database</a>, <a href="http://www.aao.gov.au/local/www/6df/">Six-degree
+Field Galaxy Redshift
+Survey</a>, <a href="http://msowww.anu.edu.au/2dFGRS/">Two-degree
+Field Galaxy Redshift
+Survey</a>, <a href="https://www.cfa.harvard.edu/~dfabricant/huchra/zcat/">ZCAT</a>
+and <a href="http://egg.astro.cornell.edu/index.php">ALFALFA</a> In
+each case we restricted the sample to galaxies with heliocentric
+redshifts less than 0.15 and did our best to exclude stars
+misclassified as galaxies.  We combined the source lists and removed
+duplicates.  In addition, we determined the SDSS coverage of each
+galaxy and kept only those within the SDSS imaging survey.</p>
+
+<p class="text-left">Each galaxy is given a unique integer (NSAID)
+based on its position in this original catalog, which we use to label
+each galaxy. Together with the NSA version (e.g. <code>v0_1_0</code>)
+the <code>NSAID</code> uniquely identifies each galaxy. Note that some
+galaxies are removed due to problems identified in the analysis, so
+the <code>NSAID</code> values are non-contiguous. Also note that for
+different major versions (e.g. <code>v0</code> versus <code>v1</code>)
+the <code>NSAID</code> designations will be different.</p>
+
+<h1 class="text-left" id="sdss">SDSS images</h1>
+
+<p class="text-left">The SDSS mosaics used here are produced using the
+sky-subtraction techniques described
+in <a href="http://adsabs.harvard.edu/abs/2011AJ....142...31B">Blanton
+et al. (2011)</a>. They correspond to the data in Data Release
+8. These have been shown to be typically well enough sky-subtracted to
+handle galaxies with half-light radii of over an arcminute. </p>
+
+<p class="text-left">The sizes of the images were determined based on
+the estimated sizes and/or magnitudes of the objects from the source
+catalogs. Occasionally these have proven too small, causing problems
+with the derived photometry.</p>
+
+<p class="text-left">The photometric calibration of the images is that
+corresponding
+to <a href="http://www.sdss.org/dr13/algorithms/fluxcal/">SDSS
+DR13</a>. It is described
+in <a href="http://adsabs.harvard.edu/abs/2015arXiv151201214F">Finkbeiner
+et al. (2015)</a>.</p>
+
+<h1 class="text-left" id="galex">GALEX images</h1>
+
+<p class="text-left">The GALEX mosaics used here were produced by David Schiminovich
+based on GR6 data.  Some of the images do not extend as far as the
+SDSS images do, but in virtually all cases they include all of the
+intended object. They have been sky-subtracted using the standard sky
+subtraction from the GALEX pipeline.</p>
+
+<h1 class="text-left" id="distance">Distances</h1>
+
+<p class="text-left"> For each object within 6,400 km/s we provide an estimate of its
+distance corrected for peculiar velocities. We perform the correction
+using the beta=0.5 linear prediction based on the IRAS 1.2 Jy redshift
+survey density field (Willick et al. 1997). </p>
+
+<p class="text-left"> The results are stored in the columns of the master catalog:</p>
+<ul class="list-group">
+<li class="list-group-item text-left"> <code>ZDIST</code>: redshift
+corrected for peculiar velocity, in the Local Group frame of
+reference</li>
+<li class="list-group-item text-left"> <code>ZDIST_ERR</code>:
+estimated error on redshift (assumes velocity dispersion of 150
+km/s)</li>
+<li class="list-group-item text-left"> <code>ZLG</code>: redshift in
+Local Group frame, uncorrected for peculiar velocities</li>
+</ul>
+<p class="text-left">For objects outside of 6,400
+km/s, <code>ZDIST</code> is simply equal to
+<code>ZLG</code>. For objects inside, it is the distance which
+maximizes the likelihood of observing that object under the model from
+Willick et al (1997).</p>
+
+<p class="text-left">Note that for very nearby objects there are
+available direct distance estimates; we have not attempted to
+incorporate those here.</p>
+
+<h1 class="text-left" id="photo">Photometric analysis</h1>
+
+<p class="text-left">The photometric analysis uses the detection and
+deblending technique described
+in <a href="http://adsabs.harvard.edu/abs/2011AJ....142...31B">Blanton
+et al. (2011)</a>, which is based in spirit on the SDSS photometric
+pipeline
+of <a href="http://adsabs.harvard.edu/abs/2001ASPC..238..269L">Lupton
+et al. (2001)</a>. We first determine which pixels in each mosaic are
+detected in the <var>r</var> band image. Each island of contiguous
+detected pixels defines the "parent" object.  Within each parent, we
+deblend into several different "child" objects. The primary
+differences between our algorithm here and that of the standard SDSS
+pipeline are: (a) we use constant templates based on the <var>r</var>
+band image; and (b) we require much higher significance to deblend a
+child as a galaxy rather than a star. These differences make our
+implementation more stable for the largest galaxies.</p>
+
+<p class="text-left">For the child objects, we measure them using some
+of the standard techniques employed by SDSS. We measure their
+azimuthally-averaged profiles and calculate circular Petrosian
+quantities using the SDSS parameters (<code>PETROFLUX</code> in the
+catalog). In addition, we calculate Stokes parameters, which yield
+second-order axis ratios and position angles at the 50% and 90% light
+radii. Other parameters measured are listed in the data model.  We
+have also performed one-component, two-dimensional Sersic fits
+(including the PSF in the model) that yield a Sersic index, half-light
+radius, position angle, axis ratio and flux.  </p>
+
+<p class="text-left">The most robust fluxes and magnitudes available
+are from the elliptical Petrosian aperture photometry, a new addition
+since that paper.  The definition of the Petrosian radius used for the
+apertures is based on the SDSS r-band and is identical to
+the <a href="testng.sdss.org/dr13/algorithms/magnitudes/#mag_petro">usual
+SDSS definition</a> except using elliptical instead of circular
+apertures. The position angle and axis ratio of the ellipses used are
+determined from the Stokes parameters of the light distribution at
+around the 90% light radius (as determined using the circular
+Petrosian fluxes). Based on simulations, these magnitudes avoid the
+dependence on ellipticity of the circular Petrosian magnitudes and
+avoid the biases associated with the single-component Sérsic fits
+released in <code>v0_1_2</code>. They do have the expected dependence
+of Petrosian magnitudes on profile shape, leading to an underestimate
+of the total flux for pure de Vaucouleurs galaxies.</p>
+
+<p class="text-left">We have also applied aperture corrections to the
+photometry, to account for the variation in point spread function
+between the bandpasses, particularly for GALEX. We do so by using the
+measured curve-of-growth to predict the aperture correction for an
+ideal elliptical galaxy, and applying this correction to the real
+data. For GALEX, these corrections can be of order 30% to 50% for
+galaxies with half-light radii around an arcsec; for SDSS they are
+always negligible.</p>
+
+<p class="text-left">We correct all the fluxes to the AB system and
+calculate absolute magnitudes using the routines in
+the <a href="http://howdy.physics.nyu.edu/index.php/Kcorrect">kcorrect</a>
+package (<code>v4_3</code>). The inverse variances for each absolute
+magnitude are listed; these include estimated distance
+uncertainties. Note in some cases some bands (particularly far- and
+near-UV) are missing; for such objects the corresponding inverse
+variances are set to zero.</p>
+
+<p class="text-left">After the analysis, the results are inspected to
+remove catalog entries that turned out to be stars, which there are
+some of, and remaining duplicates. The latter can occur when there are
+several SDSS spectra (for example) off-center from the galaxy. </p>
+
+</div>
+</div>
+
+{% endblock body %}

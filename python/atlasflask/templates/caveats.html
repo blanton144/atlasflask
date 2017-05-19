@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% set active_page = "caveats" %}
+
+{% block head %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<link rel="stylesheet" type="text/css" media="screen" href="static/css/prospectus.css" />
+<meta name="robots" content="noindex" />
+<meta content="text/html;">
+<title>NASA-Sloan Atlas: Caveats</title>
+<meta http-equiv="refresh" CONTENT="600"/>
+
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<link href="static/css/cover.css" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+
+<div class=row> 
+	<div class=col-md-9 role=main>
+
+<p class="text-left">As with any catalog, the NASA-Sloan Atlas should
+be used with some caution. In general, for galaxies with suspicious or
+unusual catalog parameters, or which are very bright, it is worth
+using the NSAID to look them up in our <a href="search">search
+form</a> to determine whether there are comments about them or obvious
+problems in the images.  A good rule of thumb is that most NGC or UGC
+objects are fine, but most Messier objects are not.</p>
+
+<p class="text-left">More particularly:</p>
+
+<ol class="list-group">
+<li class="list-group-item text-left"><b>i and z band sky
+fluctuations</b>: The sky subtraction method used leaves some low
+surface brightness galaxies sensitive to sky subtraction issues.
+About 5% of the sky area of SDSS has <var>i</var> and <var>z</var>
+band sky variations that our sky subtraction does not track well.
+This affects galaxies of low surface brightness
+(&mu;<sub>50</sub>&gt;22.5), sometimes substantially affecting their
+red colors.</li>
+
+<li class="list-group-item text-left"><b>Deblending issues</b>:
+Although in general the data is better than the SDSS photometry, there
+are known to still be some deblending problems in the NSA.  In
+particular, near bright stars and galaxies there are still errors. For
+the largest galaxies, particularly those brighter
+than <var>r</var>&lt;12, deblending can substantially affect the
+flux.</li>
+
+<li class="list-group-item text-left"><b>Distances</b>: The distances
+and absolute magnitudes are based on the velocity model of Willick et
+al. 1997. In general, this can differ from other estimates, and in
+particular we have not included direct distance estimates for the
+nearest objects.</li>
+
+<li class="list-group-item text-left"><b>GALEX fluxes</b>: For the
+largest objects, the GALEX fluxes are underestimated by about 0.3 mag
+relative to Gil de Paz et al. (2009).  The nature of that discrepancy
+is unclear.</li>
+
+<li class="list-group-item text-left"><b>Matching to SDSS
+spectroscopy</b>: The SDSS spectroscopy is used as a source catalog
+for redshifts in generating the NSA.  Sometimes these spectra are
+"off-center" as determined in our photometric analysis. Therefore, we
+have separately matched the final measured centers to the SDSS
+spectroscopy.  In cases selected from the SDSS catalog but for which
+there is no SDSS spectrum at the galaxy center, the redshifts listed
+are from the off-center spectrum, and we list no other spectroscopic
+measurements.  If there is an SDSS spectrum at the galaxy center, the
+redshift from that spectrum is used, and we list the spectroscopic
+measurements from Yan et al. (2011). In this manner, except for
+redshifts, we have only listed spectroscopic measurements for galaxy
+centers, not for off-center spectra.</li>
+
+</ol>
+
+<p class="text-left">Caveats associated with previous version of the
+catalog are given below:</p>
+
+<ol class="list-group text-left">
+<li class="list-group-item text-left"><b>Astrometric errors</b>:
+In <code>v0_1_2</code> and earlier, at declinations above 41 deg,
+there can be small astrometric errors in the mosaics and catalog
+positions, up to about a 0.25 arcsec shift. The nature of these errors
+are described in
+the <a href="http://www.sdss3.org/dr8/algorithms/astrometry.php#caveats">SDSS
+DR8</a> documentation.</li>
+
+</ol>
+
+</div>
+</div>
+
+{% endblock body %}

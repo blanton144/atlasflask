@@ -1,0 +1,56 @@
+/*
+ * Globals
+ */
+
+a {
+		background-color: #000;
+		color: #ddd;
+}
+
+a:hover,
+a:focus {
+		background-color: #333;
+		color: #ddd;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+  background-color: #444;
+  text-shadow: none; /* Prevent inheritence from `body` */
+}
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #000;
+}
+body {
+  color: #eee;
+  text-align: center;
+}
+
+pre.left {
+	text-align: left;
+}
+
+.navbar {
+  background-color: #000;
+}
+
+.nav {
+  background-color: #000;
+}
+
+.active {
+  background-color: #000;
+}
+
+code {
+		color: #fdd;
+		background-color: #000;
+}

@@ -1,0 +1,87 @@
+/* Position and size for main color cutout */
+
+body { 
+    padding-top: 65px; 
+}
+
+div.mosaic_jpg {
+		overflow: hidden;
+		width: 300px; /* set size here */
+		height: 300px;
+		image-rendering: pixelated;
+}
+
+/* Position, size etc for band images */ 
+div.band_jpg_table {
+		position: absolute;
+		left: 20px;
+		top: 400px;
+		width: 810px;
+		height: 120px;
+}
+
+td.band_jpg_td {
+		position: relative;
+		left: 0px;
+		top: 0px;
+}
+
+div.band_jpg,
+img.band_jpg {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+}
+
+div.prospectusBands thead {
+	color: #EEEE00;
+	text-align: center;
+}
+
+div.prospectusInfo {
+	position: absolute;
+	left: 0px;
+	top: 340px;
+	width: 310px;
+	height: 210px;
+}
+
+div.prospectusInfo table {
+	background: #000000;
+	color: #EEEEEE;
+	border:1px solid #000000;
+	text-align: left;
+	border-collapse:separate;
+	border-spacing: 5px 0px;
+}
+
+div.prospectusLinks {
+	position: absolute;
+	left: 320px;
+	top: 340px;
+	width: 400px;
+}
+
+div.prospectusLinks table {
+	background: #000000;
+	color: #EEEEEE;
+	border:1px solid #000000;
+	text-align: left;
+	border-collapse:separate;
+	border-spacing: 5px 0px;
+}
+
+div.prospectusComments {
+	position: absolute;
+	text-align: left;
+	left: 320px;
+	top: 395px;
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	width: 450px;
+	height: 95px;
+	line-height: 6px;
+	overflow: auto;
+}
+

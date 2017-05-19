@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% set active_page = active_page|default('index') -%}
+<html lang="en">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<head>
+    {# include bootstrap stuff #}
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/prospectus.css" />
+		<meta name="robots" content="noindex" />
+		<meta content="text/html;">
+		<title>NASA-Sloan Atlas</title>
+		<meta http-equiv="refresh" CONTENT="600"/>
+		
+		<link href="static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="static/css/cover.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="static/css/cover.css" rel="stylesheet">
+    {% block head %}
+		{% endblock head%}
+    <link href="static/css/general.css" rel="stylesheet">
+</head>
+
+<body>
+{# include bootstrap and jquery #}
+<script src="../static/js/jquery-1.12.3.min.js"></script>
+<script src="../static/js/jquery-migrate-1.3.0.min.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+
+{% include 'header.html' %}
+
+<div class="container-fluid" id="content">
+    {% if errorMsg %}
+    <div class="row">
+        <div class="col-md-12">
+            <p class=error><strong><font color="red">ERROR:</font> </strong> {{ errorMsg }} </p>
+        </div>
+    </div>
+    {% endif %}
+  {% block body %}{%endblock body %}
+</div>
+
+{# could add a footer here if wanted #}
+
+{% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+{% set active_page = "data" %}
+
+{% block head %}
+ {{ super() }}
+{% endblock head %}
+
+{% block body %}
+
+<div class=row> 
+	<div class=col-md-9 role=main>
+		<h1 class="text-left">Catalog</h1>
+
+		<p class="text-left">
+			The NASA-Sloan Atlas data is available in flat-file form. The
+			latest version and previous versions are available below.
+		</p>
+
+		<table class="text-left">
+			<tr>
+				<td>
+					<a class="btn btn-default" href="{{urldata}}/nsa_v1_0_1.fits" role="button">nsa_v1_0_1.fits</a>
+				</td>
+				<td>
+					2.5 Gb
+				</td>
+				<td>
+					<a class="btn btn-default" href="http://internal.sdss.org/datamodel/files/ATLAS_DATA/ATLAS_MAJOR_VERSION/nsa.html">data model</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a class="btn btn-default" href="http://sdss.physics.nyu.edu/mblanton/v0/nsa_v0_1_2.fits" role="button">nsa_v0_1_2.fits</a>
+				</td>
+				<td>
+					0.5 Gb
+				</td>
+				<td>
+					<a class="btn btn-default" href="http://nsatlas.org/data">data model</a>
+				</td>
+			</tr>
+		</table>
+
+		<p class="text-left">The NASA-Sloan Atlas <code>v1_0_1</code> is
+		also available through
+		the <a href="http://skyserver.sdss.org/casjobs">SDSS Catalog
+		Archive server</a> in DR13 through the <code>nsa</code> table.</p>
+			
+		<h1 class="text-left">Images</h1>
+
+		<p class="text-left">Given a catalog entry, it is possible to
+			download the images used for their measurement. For each object,
+			FITS format images can be retrieved at subdirectories of the
+			following URL:</p>
+
+		<p class="text-left" style="word-wrap: break-word;"><code><a href="{{urldata}}/detect/v1_0/">{{urldata}}/detect/v1_0/</a></code></p>
+
+		<p class="text-left">The subdirectories follow the following
+		  patterns based on the values
+		  of <code>SUBDIR</code>, <code>IAUNAME</code>, <code>PID</code>,
+		  and <code>AID</code> given in the catalog file:</p>
+
+		<ul class="list-group">
+			<li class="list-group-item text-left">
+				<code>[SUBDIR]/[IAUNAME]-[band].fits.gz</code> (full mosaic)
+			</li>
+			<li class="list-group-item text-left">
+				<code>[SUBDIR]/atlases/[PID]/[IAUNAME]-parent-[PID].fits.gz</code> (parent image)
+			</li>
+			<li class="list-group-item text-left">
+				<code>[SUBDIR]/atlases/[PID]/[IAUNAME]-[PID]-atlas-[AID].fits.gz</code> (child image)
+			</li>
+		</ul>
+
+		<p class="text-left">The full mosaic for each band is a square
+			mosaic centered around the catalog object center (RACAT, DECCAT
+			in the master catalog); in this case "band" is one of "u", "g",
+			"r", "i", "z", "fd", and "nd".</p>
+
+		<p class="text-left">The parent image is a cutout of that mosaic
+			containing the galaxy and any of its close neighbors.  It has 14
+			HDU: the even HDU are the images in SDSS u, SDSS g, SDSS r, SDSS
+			i, SDSS z, GALEX near UV, and GALEX far UV; the odd HDU are the
+			inverse variances of the same.  The units are nanomaggies.</p>
+
+    <p class="text-left">The child image is the deblended child of the
+      parent, used for the measurements in the catalog.  It has 7 HDU,
+      one for each image in each band; the inverse variances used in
+      the measurements are the same as for the parent.</p>
+
+		<h1 class="text-left" id="sources">Source catalog information</h1>
+		
+		<p class="text-left">Some ancillary information regarding the catalogs from which this
+			sample is selected can be found here:</p>
+
+		<ul class="list-group">
+			<li class="list-group-item text-left"> <a href="http://www.sdss3.org/dr8">Sloan Digital Sky Server
+					DR8</a> (see <a href="{{urldata}}/catalogs/sdss_atlas.fits">source data
+					file</a>)</li>
+			<li class="list-group-item text-left"> <a href="http://nedwww.ipac.caltech.edu/">NASA Extragalactic Database</a> (see <a href="{{urldata}}/catalogs/sdss_atlas.fits">source data
+					file</a>)</li>
+			<li class="list-group-item text-left"> <a href="http://www.aao.gov.au/local/www/6df/">Six-degree Field Galaxy Redshift Survey</a> (see <a
+																																																							href="{{urldata}}/catalogs/sixdf_atlas.fits">source data
+					file</a>)</li>
+			<li class="list-group-item text-left"> <a href="http://msowww.anu.edu.au/2dFGRS/">Two-degree Field Galaxy Redshift Survey</a> (see <a
+																																																					href="{{urldata}}/catalogs/twodf_atlas.fits">source data
+					file</a>)</li>
+			<li class="list-group-item text-left"> <a href="https://www.cfa.harvard.edu/~dfabricant/huchra/zcat/">ZCAT</a> (see <a href="{{urldata}}/catalogs/zcat_atlas.fits">source data
+					file</a>)</li>
+			<li class="list-group-item text-left"> <a href="http://egg.astro.cornell.edu/index.php">ALFALFA</a> (see <a href="{{urldata}}/catalogs/alfalfa_atlas.fits">source data
+					file</a>)</li>
+		</ul>
+
+		<h1 class="text-left" id="release">Release notes</h1>
+
+    <p class="text-left">The NSA version numbers are of the form
+       "vN_M_P". In this scheme, "N" is the "major version" and refers
+       to the version of the source catalogs used.  All versions
+       starting with vN will have consistent NSAID numbers. "M" refers
+       to the version of the photometric analysis; for example, when a
+       new set of imaging is included, M is incremented.  "P" refers
+       to changes in derived data (K-corrections, line measurements,
+       and the like).</p>
+
+		<ul class="list-group">
+			<li class="list-group-item text-left"><code>v1_0_1</code>:
+			  Includes galaxies to larger redshift (z &lt; 0.15) and
+			  elliptical Petrosian quantities. Does not include emission
+			  line measurements. Small changes to deblending and detection
+			  pipeline.</li>
+			<li class="list-group-item text-left"><code>v0_1_2</code>: Last
+				release under major version <code>v0</code>, includes 3800 new
+				objects accidentally trimmed in earlier versions (mostly
+				fairly compact objects).</li>
+			<li class="list-group-item text-left"><code>v0_1_1</code>: Includes updated line measurements
+				and corrections to the K-corrections.</li>
+			<li class="list-group-item text-left"><code>v0_1_0</code>: Added GALEX imaging analysis, corrected severe error in
+				Sersic measurements.</li>
+			<li class="list-group-item text-left"><code>v0_0_0</code>: Original version with just SDSS data. </li>
+		</ul>
+	</div>
+</div>
+
+{% endblock body %}
